@@ -29,6 +29,7 @@ public class WordleGame {
     private final Set<String> usedHintsSet = new HashSet<>();
 
     private final Map<Character, Integer> requiredLetters = new LinkedHashMap<>();
+
     private final Set<Character> absentLetters = new HashSet<>();
     private final char[] exactPositions = new char[5];
     private final Map<String, Integer> hintUsageCount = new LinkedHashMap<>();
@@ -47,8 +48,7 @@ public class WordleGame {
         Arrays.fill(exactPositions, '\0');
 
         log.println("Игра запущена | Загадано слово из 5 букв | Словарь: " +
-                dictionary.getAllWords().size() +
-                " слов");
+                dictionary.getAllWords().size() + " слов");
     }
 
     public String makeGuess(String rawInput) {
@@ -246,10 +246,27 @@ public class WordleGame {
         return count;
     }
 
-    public int getStepsLeft() { return stepsLeft; }
-    public boolean isFinished() { return isFinished; }
-    public boolean isWon() { return isWon; }
-    public String getAnswer() { return answer; }
-    public List<String> getGuessedWords() { return Collections.unmodifiableList(guessedWords); }
-    public Set<String> getUsedHints() { return Collections.unmodifiableSet(usedHintsSet); }
+    public int getStepsLeft() {
+        return stepsLeft;
+    }
+
+    public boolean isFinished() {
+        return isFinished;
+    }
+
+    public boolean isWon() {
+        return isWon;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public List<String> getGuessedWords() {
+        return Collections.unmodifiableList(guessedWords);
+    }
+
+    public Set<String> getUsedHints() {
+        return Collections.unmodifiableSet(usedHintsSet);
+    }
 }

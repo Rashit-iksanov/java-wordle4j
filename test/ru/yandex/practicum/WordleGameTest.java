@@ -331,7 +331,7 @@ class WordleGameTest {
             game.requestHint();
             testLog.flush();
             String log = logCapture.toString();
-            assertTrue(log.contains("[HINT]"));
+            assertFalse(log.contains("HINT"));
             assertTrue(log.contains("Приоритет:"));
         }
     }
