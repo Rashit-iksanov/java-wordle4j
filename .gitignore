@@ -5,12 +5,12 @@ target/
 !**/src/test/**/target/
 
 ### IntelliJ IDEA ###
- .idea/
- *.iml
- *.ipr
- *.iws
- out/
- target/
+/.idea
+*.iws
+*.iml
+*.ipr
+
+
 
 ### Eclipse ###
 .apt_generated
