@@ -30,7 +30,7 @@ public class WordleDictionaryLoader {
             String line;
             while ((line = reader.readLine()) != null) {
                 String normalized = normalize(line);
-                if (normalized.length() == 5 && normalized.matches("[а-я]+")) {
+                if (normalized.matches("[а-я]+")) {
                     validWords.add(normalized);
                 }
             }

@@ -20,16 +20,12 @@ public class Wordle {
         try (PrintWriter log = new PrintWriter(new BufferedWriter(
                 new OutputStreamWriter(new FileOutputStream("wordle.log"), StandardCharsets.UTF_8)));
              Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8)) {
-
             log.println("*** Запуск Wordle ***");
             WordleDictionaryLoader loader = new WordleDictionaryLoader(log);
             WordleDictionary dictionary = loader.load("words_ru.txt");
-
             String targetWord = dictionary.getRandomWord(new java.util.Random());
             log.println("Загаданное слово (для отладки): " + targetWord);
-
             WordleGame game = new WordleGame(dictionary, targetWord, log);
-
             System.out.println("Добро пожаловать в Wordle!");
             System.out.println("Угадайте существительное из 5 букв.");
             System.out.println("Введите слово или нажмите Enter для подсказки.");
@@ -57,6 +53,8 @@ public class Wordle {
             System.out.println(game.isWon() ? "Поздравляем, вы победили!" : "Игра окончена.");
             System.out.println("Загаданное слово: " + game.getAnswer());
             log.println("Игра завершена. Результат: " + (game.isWon() ? "WIN" : "LOSS"));
+
+            log.flush();
 
         } catch (IOException e) {
             System.err.println("Ошибка работы с файлами: " + e.getMessage());

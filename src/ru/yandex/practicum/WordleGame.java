@@ -159,13 +159,15 @@ public class WordleGame {
 
     private String calculateFeedback(String target, String guess) {
         char[] result = new char[5];
-        int[] targetCounts = new int[65536];
+        Map<Character, Integer> targetCounts = new HashMap<>();
 
         for (int i = 0; i < 5; i++) {
-            if (guess.charAt(i) == target.charAt(i)) {
+            char g = guess.charAt(i);
+            char t = target.charAt(i);
+            if (g == t) {
                 result[i] = '+';
             } else {
-                targetCounts[target.charAt(i)]++;
+                targetCounts.put(t, targetCounts.getOrDefault(t, 0) + 1);
                 result[i] = '-';
             }
         }
@@ -173,19 +175,11 @@ public class WordleGame {
         for (int i = 0; i < 5; i++) {
             if (result[i] == '+') continue;
             char c = guess.charAt(i);
-            if (targetCounts[c] > 0) {
+            Integer count = targetCounts.get(c);
+            if (count != null && count > 0) {
                 result[i] = '^';
-                targetCounts[c]--;
+                targetCounts.put(c, count - 1);
             }
-        }
-
-        if (result.length != 5) {
-            throw new RuntimeException(new StringBuilder()
-                    .append("Внутренняя ошибка: длина фидбека != 5 | target=")
-                    .append(target)
-                    .append(" | guess=")
-                    .append(guess)
-                    .toString());
         }
         return new String(result);
     }

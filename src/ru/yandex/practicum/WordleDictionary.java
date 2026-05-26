@@ -1,18 +1,18 @@
 package ru.yandex.practicum;
 
-import java.util.List;
-import java.util.Collections;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Random;
+import java.util.*;
 
 public class WordleDictionary {
     private final List<String> words;
     private final Set<String> wordSet;
 
     public WordleDictionary(List<String> words) {
-        this.words = Collections.unmodifiableList(List.copyOf(words));
-        this.wordSet = Collections.unmodifiableSet(new HashSet<>(words));
+        Objects.requireNonNull(words, "Список слов не может быть null");
+        if (words.isEmpty()) {
+            throw new IllegalArgumentException("Словарь не может быть пустым");
+        }
+        this.words = List.copyOf(words);
+        this.wordSet = Set.copyOf(new HashSet<>(words));
     }
 
     public boolean contains(String word) {
@@ -24,7 +24,6 @@ public class WordleDictionary {
     }
 
     public String getRandomWord(Random random) {
-        if (words.isEmpty()) throw new IllegalStateException("Словарь пуст");
         return words.get(random.nextInt(words.size()));
     }
 }
